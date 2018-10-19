@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Know Your Nation</string>
+    <string name="your_nation_details">Your Nation Details</string>
+    <string name="nation_details_coming_soon">Nation Details\nComing Soon</string>
+
+    <string name="no_network_available">No Network Available</string>
+    <string name="started_loading_nations">Started Loading Nations</string>
+    <string name="error_while_loading_nations">Error While Loading Nations</string>
+    <string name="nations_information_not_available">Nations Information Not Available</string>
+    <string name="title_activity_listing_details">ListingDetailsActivity</string>
+</resources>
