@@ -2,6 +2,7 @@ package com.myapplication.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,16 +13,23 @@ import android.widget.TextView;
 
 import com.ahmadrosid.svgloader.SvgLoader;
 import com.myapplication.R;
+import com.myapplication.activities.ListingDetailsActivity;
 import com.myapplication.models.Nation;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.myapplication.utils.Constants.NATION;
+
 public class ListingsRecyclerViewAdapter extends RecyclerView.Adapter<ListingsRecyclerViewAdapter.ViewHolder> {
+
+    private static final String TAG = ListingsRecyclerViewAdapter.class.getSimpleName();
 
     private Context context;
     private List<Nation> nationsData;
     private LayoutInflater layoutInflater;
-    private ItemClickListener itemClickListener;
 
     public ListingsRecyclerViewAdapter(Context context, List<Nation> nationsData) {
         this.context = context;
@@ -51,33 +59,29 @@ public class ListingsRecyclerViewAdapter extends RecyclerView.Adapter<ListingsRe
         return nationsData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.textView)
         TextView textView;
+
+        @BindView(R.id.imageView)
         ImageView imageView;
 
         ViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textView);
-            imageView = itemView.findViewById(R.id.imageView);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ListingDetailsActivity.class);
+                    intent.putExtra(NATION, getItem(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
     Nation getItem(int id) {
         return nationsData.get(id);
-    }
-
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

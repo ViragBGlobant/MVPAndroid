@@ -1,4 +1,4 @@
-package com.myapplication.networks;
+package com.myapplication.networks.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

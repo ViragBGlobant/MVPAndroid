@@ -6,6 +6,21 @@
     <string name="no_network_available">No Network Available</string>
     <string name="started_loading_nations">Started Loading Nations</string>
     <string name="error_while_loading_nations">Error While Loading Nations</string>
+    <string name="error_while_loading_nation_details">Error While Loading Nation Details</string>
     <string name="nations_information_not_available">Nations Information Not Available</string>
     <string name="title_activity_listing_details">ListingDetailsActivity</string>
+
+    <string name="search">Search</string>
+    <string name="map">Map</string>
+
+    <string name="name">Name :</string>
+    <string name="nativename">Native Name :</string>
+    <string name="capital">Capital :</string>
+    <string name="area">Area :</string>
+    <string name="region">Region :</string>
+    <string name="subregion">Sub-Region :</string>
+    <string name="population">Population :</string>
+    <string name="alphacode">Alpha Code :</string>
+    <string name="numericcode">Numeric Code :</string>
+
 </resources>

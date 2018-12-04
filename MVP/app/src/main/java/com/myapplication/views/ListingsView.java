@@ -11,4 +11,6 @@ public interface ListingsView {
     void onSuccess(List<Nation> nations);
 
     void onFailure();
+
+    void onEmptyListReceived();
 }

@@ -8,6 +8,8 @@ import java.util.List;
 
 public class ListingsPresenter implements ListingsInteractor.onListingDownloadFinishedListener {
 
+    private static final String TAG = ListingsPresenter.class.getSimpleName();
+
     private ListingsView listingsView;
     private ListingsInteractor listingsInteractor;
 
@@ -35,6 +37,13 @@ public class ListingsPresenter implements ListingsInteractor.onListingDownloadFi
     public void onListingDownloadFailure() {
         if (listingsView != null) {
             listingsView.onFailure();
+        }
+    }
+
+    @Override
+    public void onEmptyListingReceived() {
+        if (listingsView != null) {
+            listingsView.onEmptyListReceived();
         }
     }
 }
