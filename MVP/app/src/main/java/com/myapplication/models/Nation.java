@@ -1,52 +1,91 @@
 package com.myapplication.models;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.myapplication.databases.StringConverter;
 
+@Entity
 public class Nation implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "region")
     @SerializedName("region")
     private String region;
 
+    @ColumnInfo(name = "numericCode")
     @SerializedName("numericCode")
     private String numericCode;
 
+    @ColumnInfo(name = "nativeName")
     @SerializedName("nativeName")
     private String nativeName;
 
+    @ColumnInfo(name = "alpha2Code")
     @SerializedName("alpha2Code")
     private String alpha2Code;
 
+    @ColumnInfo(name = "capital")
     @SerializedName("capital")
     private String capital;
 
+    @ColumnInfo(name = "subregion")
     @SerializedName("subregion")
     private String subregion;
 
+    @ColumnInfo(name = "flag")
     @SerializedName("flag")
     private String flag;
 
+    @ColumnInfo(name = "area")
     @SerializedName("area")
     private String area;
 
+    @ColumnInfo(name = "name")
     @SerializedName("name")
     private String name;
 
+    @ColumnInfo(name = "latlng")
     @SerializedName("latlng")
+    @TypeConverters(StringConverter.class)
     private String[] latlng;
 
+    @ColumnInfo(name = "demonym")
     @SerializedName("demonym")
     private String demonym;
 
+    @ColumnInfo(name = "borders")
     @SerializedName("borders")
+    @TypeConverters(StringConverter.class)
     private String[] borders;
 
+    @ColumnInfo(name = "population")
     @SerializedName("population")
     private String population;
 
+    public Nation(String region, String numericCode, String nativeName, String alpha2Code, String capital, String subregion, String flag, String area, String name, String demonym, String population) {
+        this.region = region;
+        this.numericCode = numericCode;
+        this.nativeName = nativeName;
+        this.alpha2Code = alpha2Code;
+        this.capital = capital;
+        this.subregion = subregion;
+        this.flag = flag;
+        this.area = area;
+        this.name = name;
+        this.demonym = demonym;
+        this.population = population;
+    }
+
     protected Nation(Parcel in) {
+        id = in.readInt();
         region = in.readString();
         numericCode = in.readString();
         nativeName = in.readString();
@@ -69,6 +108,7 @@ public class Nation implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(region);
         dest.writeString(numericCode);
         dest.writeString(nativeName);
@@ -97,6 +137,13 @@ public class Nation implements Parcelable {
         }
     };
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getRegion() {
         return region;

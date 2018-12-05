@@ -8,7 +8,7 @@
     android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
-        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginStart="@dimen/fab_margin"
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"

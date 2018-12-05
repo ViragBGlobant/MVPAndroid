@@ -14,8 +14,8 @@ public class SplashPresenter {
 
     private static final int SPLASH_TIME = 1000;
 
-    private Context context;
-    private SplashView splashView;
+    private final Context context;
+    private final SplashView splashView;
 
     public SplashPresenter(Context context, SplashView splashView) {
         this.context = context;

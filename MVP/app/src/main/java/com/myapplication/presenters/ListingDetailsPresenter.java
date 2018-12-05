@@ -1,20 +1,19 @@
 package com.myapplication.presenters;
 
-import android.content.Context;
-
 import com.myapplication.models.Nation;
+import com.myapplication.utils.Utils;
 import com.myapplication.views.ListingDetailsView;
 
 public class ListingDetailsPresenter {
 
-    private ListingDetailsView listingDetailsView;
+    private final ListingDetailsView listingDetailsView;
 
     public ListingDetailsPresenter(ListingDetailsView listingDetailsView) {
         this.listingDetailsView = listingDetailsView;
     }
 
     public void showListingDetails(Nation nation) {
-        if (nation != null) {
+        if (Utils.isNotNull(nation)) {
             listingDetailsView.loadListingDetails(nation);
         } else {
             listingDetailsView.errorLoadingListingDetails();

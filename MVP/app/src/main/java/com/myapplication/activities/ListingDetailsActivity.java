@@ -2,6 +2,7 @@ package com.myapplication.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.ahmadrosid.svgloader.SvgLoader;
 import com.myapplication.R;
 import com.myapplication.models.Nation;
 import com.myapplication.presenters.ListingDetailsPresenter;
+import com.myapplication.utils.Utils;
 import com.myapplication.views.ListingDetailsView;
 
 import java.util.Locale;
@@ -67,11 +69,20 @@ public class ListingDetailsActivity extends AppCompatActivity implements Listing
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_details);
+        ButterKnife.bind(this);
+        initUI();
+    }
+
+    private void initUI() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
-        ButterKnife.bind(this);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        }
 
         nation = Objects.requireNonNull(getIntent().getExtras()).getParcelable(NATION);
 
@@ -79,7 +90,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements Listing
         listingDetailsPresenter.showListingDetails(nation);
     }
 
-    @Override
+        @Override
     public void loadListingDetails(Nation nation) {
         SvgLoader.pluck().with(this).setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher).load(nation.getFlag(), flagImageView);
         nameTextView.setText(nation.getName());
@@ -114,17 +125,20 @@ public class ListingDetailsActivity extends AppCompatActivity implements Listing
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                return true;
+
             case R.id.map:
-                if (nation != null && nation.getLatlng() != null) {
+                if (Utils.isNotNull(nation) && Utils.isNotNull(nation.getLatlng())) {
                     String[] latlong = nation.getLatlng();
-                    if (latlong != null) {
-                        String latitude = latlong[0];
-                        String longitude = latlong[1];
-                        listingDetailsPresenter.onMapButtonClicked(latitude, longitude);
-                    }
+                    String latitude = latlong[0];
+                    String longitude = latlong[1];
+                    listingDetailsPresenter.onMapButtonClicked(latitude, longitude);
                 }
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

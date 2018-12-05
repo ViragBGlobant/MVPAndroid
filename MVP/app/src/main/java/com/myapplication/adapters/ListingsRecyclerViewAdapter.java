@@ -27,9 +27,9 @@ public class ListingsRecyclerViewAdapter extends RecyclerView.Adapter<ListingsRe
 
     private static final String TAG = ListingsRecyclerViewAdapter.class.getSimpleName();
 
-    private Context context;
-    private List<Nation> nationsData;
-    private LayoutInflater layoutInflater;
+    private final Context context;
+    private final List<Nation> nationsData;
+    private final LayoutInflater layoutInflater;
 
     public ListingsRecyclerViewAdapter(Context context, List<Nation> nationsData) {
         this.context = context;
